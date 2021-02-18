@@ -1,0 +1,25 @@
+//
+//  HTTPManager.swift
+//  CurrencyConverter
+//
+//  Created by Владислав Банков on 18.02.2021.
+//
+
+import Foundation
+
+final class HTTPManager {
+	
+	private var data: Data?
+	
+	func makeGetRequest(to url: URL, completion: @escaping (_ data: Data?, _ error: Error?) -> Void) {
+		DispatchQueue.global(qos: .userInteractive).async {
+			var request = URLRequest(url: url)
+			request.httpMethod = "get"
+			let session = URLSession(configuration: URLSessionConfiguration.default)
+			let task = session.dataTask(with: request) { data, response, error in
+				completion(data, error)
+			}
+			task.resume()
+		}
+	}
+}

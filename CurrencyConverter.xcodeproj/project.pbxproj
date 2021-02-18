@@ -12,6 +12,12 @@
 		9E2B816D25DE7A0D009A2E0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E2B816C25DE7A0D009A2E0B /* Assets.xcassets */; };
 		9E2B817025DE7A0D009A2E0B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E2B816E25DE7A0D009A2E0B /* LaunchScreen.storyboard */; };
 		9E2B818325DE7AE9009A2E0B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2B818225DE7AE9009A2E0B /* HomeViewController.swift */; };
+		9E2B818925DE9372009A2E0B /* Assembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2B818825DE9372009A2E0B /* Assembly.swift */; };
+		9E2B818C25DE95A1009A2E0B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2B818B25DE95A1009A2E0B /* HomeView.swift */; };
+		9E2B818F25DE95B1009A2E0B /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2B818E25DE95B1009A2E0B /* HomePresenter.swift */; };
+		9E2B819525DE969D009A2E0B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2B819425DE969D009A2E0B /* Constants.swift */; };
+		9E2B819825DE96C3009A2E0B /* HTTPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2B819725DE96C3009A2E0B /* HTTPManager.swift */; };
+		9E2B819B25DE96E5009A2E0B /* JSONModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2B819A25DE96E5009A2E0B /* JSONModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +28,12 @@
 		9E2B816F25DE7A0D009A2E0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9E2B817125DE7A0D009A2E0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E2B818225DE7AE9009A2E0B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		9E2B818825DE9372009A2E0B /* Assembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assembly.swift; sourceTree = "<group>"; };
+		9E2B818B25DE95A1009A2E0B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		9E2B818E25DE95B1009A2E0B /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
+		9E2B819425DE969D009A2E0B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		9E2B819725DE96C3009A2E0B /* HTTPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPManager.swift; sourceTree = "<group>"; };
+		9E2B819A25DE96E5009A2E0B /* JSONModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +67,8 @@
 			isa = PBXGroup;
 			children = (
 				9E2B817C25DE7A4C009A2E0B /* Application */,
-				9E2B818225DE7AE9009A2E0B /* HomeViewController.swift */,
+				9E2B819D25DE9852009A2E0B /* Networking */,
+				9E2B819125DE95C1009A2E0B /* Modules */,
 				9E2B817925DE7A33009A2E0B /* Supporting files */,
 			);
 			path = CurrencyConverter;
@@ -64,6 +77,7 @@
 		9E2B817925DE7A33009A2E0B /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
+				9E2B819425DE969D009A2E0B /* Constants.swift */,
 				9E2B816C25DE7A0D009A2E0B /* Assets.xcassets */,
 				9E2B816E25DE7A0D009A2E0B /* LaunchScreen.storyboard */,
 				9E2B817125DE7A0D009A2E0B /* Info.plist */,
@@ -76,8 +90,36 @@
 			children = (
 				9E2B816325DE7A0A009A2E0B /* AppDelegate.swift */,
 				9E2B816525DE7A0A009A2E0B /* SceneDelegate.swift */,
+				9E2B818825DE9372009A2E0B /* Assembly.swift */,
 			);
 			path = Application;
+			sourceTree = "<group>";
+		};
+		9E2B819125DE95C1009A2E0B /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				9E2B819325DE95CA009A2E0B /* Home */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		9E2B819325DE95CA009A2E0B /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				9E2B818E25DE95B1009A2E0B /* HomePresenter.swift */,
+				9E2B818225DE7AE9009A2E0B /* HomeViewController.swift */,
+				9E2B818B25DE95A1009A2E0B /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		9E2B819D25DE9852009A2E0B /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				9E2B819725DE96C3009A2E0B /* HTTPManager.swift */,
+				9E2B819A25DE96E5009A2E0B /* JSONModel.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,8 +192,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E2B816425DE7A0A009A2E0B /* AppDelegate.swift in Sources */,
+				9E2B818925DE9372009A2E0B /* Assembly.swift in Sources */,
 				9E2B816625DE7A0A009A2E0B /* SceneDelegate.swift in Sources */,
+				9E2B818F25DE95B1009A2E0B /* HomePresenter.swift in Sources */,
+				9E2B819525DE969D009A2E0B /* Constants.swift in Sources */,
+				9E2B819B25DE96E5009A2E0B /* JSONModel.swift in Sources */,
+				9E2B818C25DE95A1009A2E0B /* HomeView.swift in Sources */,
 				9E2B818325DE7AE9009A2E0B /* HomeViewController.swift in Sources */,
+				9E2B819825DE96C3009A2E0B /* HTTPManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
