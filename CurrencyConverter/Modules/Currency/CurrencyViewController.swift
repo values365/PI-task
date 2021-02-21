@@ -82,9 +82,6 @@ extension CurrencyViewController: UITableViewDataSource {
 		cell.hideIcon()
 		cell.setTitle(Array(presenter.currencies.values)[indexPath.row].name)
 		cell.setSubTitle(Array(presenter.currencies.keys)[indexPath.row])
-		if Array(presenter.currencies.keys)[indexPath.row] == presenter.currentValute {
-			cell.showIcon()
-		}
 		return cell
 	}
 }
