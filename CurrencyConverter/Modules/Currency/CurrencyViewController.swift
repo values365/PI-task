@@ -12,9 +12,7 @@ protocol ICurrencyViewController: AnyObject {}
 final class CurrencyViewController: UIViewController {
 	
 	// MARK: - Properties
-	
-	var delegate: IHomeViewController?
-	private var whatButtonIs: ButtonSide = .left
+
 	private let presenter: ICurrencyPresenter
 	private let tableView = UITableView()
 	
@@ -36,12 +34,6 @@ final class CurrencyViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		presenter.viewDidLoad(with: self)
-	}
-	
-	// MARK: - Public Methods
-	
-	func setSide(_ side: ButtonSide) {
-		whatButtonIs = side
 	}
 }
 
@@ -73,7 +65,7 @@ private extension CurrencyViewController {
 		dismiss(animated: true) { [weak self] in
 			guard let self = self else { return assertionFailure("CurrencyViewController self link is nil") }
 			guard let currency = self.presenter.selectedValute else { return }
-			self.delegate?.throwCurrency(currency, button: self.whatButtonIs)
+			self.presenter.currencyDidSelected(currency: currency)
 		}
 	}
 }
@@ -90,6 +82,9 @@ extension CurrencyViewController: UITableViewDataSource {
 		cell.hideIcon()
 		cell.setTitle(Array(presenter.currencies.values)[indexPath.row].name)
 		cell.setSubTitle(Array(presenter.currencies.keys)[indexPath.row])
+		if Array(presenter.currencies.keys)[indexPath.row] == presenter.currentValute {
+			cell.showIcon()
+		}
 		return cell
 	}
 }
@@ -107,13 +102,11 @@ extension CurrencyViewController: UITableViewDelegate {
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		if let cell = tableView.cellForRow(at: indexPath) as? CurrencyViewCell { cell.showIcon() }
-		presenter.rowDidSelect(with: indexPath.row)
+		presenter.rowDidSelected(with: indexPath.row)
 	}
 }
 
 
 // MARK: - ICurrencyViewController
 
-extension CurrencyViewController: ICurrencyViewController {
-	
-}
+extension CurrencyViewController: ICurrencyViewController {}

@@ -12,7 +12,7 @@ enum Assembly {
 		return HomeViewController(with: HomePresenter())
 	}
 
-	static func initCurrencyModule(with model: JSONModel) -> CurrencyViewController {
-		return CurrencyViewController(with: CurrencyPresenter(with: model.valute))
+	static func initCurrencyModule(with presenter: CurrencyPresenter) -> CurrencyViewController {
+		return CurrencyViewController(with: presenter)
 	}
 }

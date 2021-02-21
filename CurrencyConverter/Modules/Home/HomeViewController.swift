@@ -8,19 +8,19 @@
 import UIKit
 
 protocol IHomeViewController: UIViewController {
-	var tapButtonHandler: ((_ side: ButtonSide) -> Void)? { get set }
+	var tapButtonHandler: ((_ side: CurrencySide) -> Void)? { get set }
 
+	func throwUserInput(input: String, with side: CurrencySide)
 	func setFields(leftHandSideFieldValue: String?, rightHandSideFieldValue: String?)
 	func setLabels(leftHandSideLabelValue: String?, rightHandSideLabelValue: String?)
 	func getFields() -> (String, String)
 	func getLabels() -> (String, String)
 	func dismissSpinner()
-	func throwCurrency(_ currency: Valute, button: ButtonSide)
 }
 
 final class HomeViewController: UIViewController {
 
-	var tapButtonHandler: ((_ side: ButtonSide) -> Void)?
+	var tapButtonHandler: ((_ side: CurrencySide) -> Void)?
 	
 	private let presenter: IHomePresenter
 	private let homeView = HomeView()
@@ -47,6 +47,10 @@ final class HomeViewController: UIViewController {
 }
 
 extension HomeViewController: IHomeViewController {
+	func throwUserInput(input: String, with side: CurrencySide) {
+		presenter.valueDidEntered(value: input, from: side)
+	}
+
 	func getLabels() -> (String, String) {
 		let labels = homeView.getLabels()
 		// this condition gonna be ok always
@@ -60,12 +64,6 @@ extension HomeViewController: IHomeViewController {
 		// we always have character in the text field even if it's empty, so below condition gonna be ok always
 		guard let field1 = fields.0, let field2 = fields.1 else { return ("", "") }
 		return (field1, field2)
-	}
-
-	func throwCurrency(_ currency: Valute, button: ButtonSide) {
-		button == .left ? homeView.setLabels(leftHandSideLabelValue: currency.charCode, rightHandSideLabelValue: nil)
-			: homeView.setLabels(leftHandSideLabelValue: nil, rightHandSideLabelValue: currency.charCode)
-		presenter.valuteDidChange()
 	}
 	
 	func setFields(leftHandSideFieldValue: String?, rightHandSideFieldValue: String?) {
@@ -81,4 +79,4 @@ extension HomeViewController: IHomeViewController {
 	}
 }
 
-enum ButtonSide { case right, left }
+enum CurrencySide { case right, left }

@@ -38,6 +38,7 @@ final class HomeView: UIView {
 		
 		let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
 		addGestureRecognizer(tap)
+		NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
 		leftHandCurrencyButton.addTarget(self, action: #selector(leftButtonDidTapped), for: .touchUpInside)
 		rightHandCurrencyButton.addTarget(self, action: #selector(rightButtonDidTapped), for: .touchUpInside)
 		setupConstraints()
@@ -114,6 +115,27 @@ private extension HomeView {
 		])
 	}
 
+	func getInput() {
+		guard let leftHandSideInput = leftHandValueTextField.text else { return }
+		guard let rightHandSideInput = rightHandValueTextField.text else { return }
+		guard leftHandSideInput == "" || rightHandSideInput == "" else {
+			leftHandValueTextField.text = ""
+			rightHandValueTextField.text = ""
+			return
+		}
+		guard let delegate = delegate else { return }
+		if leftHandSideInput == "" {
+			delegate.throwUserInput(input: rightHandSideInput, with: .right)
+		} else {
+			delegate.throwUserInput(input: leftHandSideInput, with: .left)
+		}
+	}
+
+	@objc func keyboardWillShow() {
+		leftHandValueTextField.text = ""
+		rightHandValueTextField.text = ""
+	}
+
 	@objc func leftButtonDidTapped() {
 		delegate?.tapButtonHandler?(.left)
 	}
@@ -124,6 +146,7 @@ private extension HomeView {
 
 	@objc func dismissKeyboard() {
 		endEditing(true)
+		getInput()
 	}
 }
 
@@ -138,12 +161,12 @@ private extension HomeView {
 	}
 	
 	func setupFieldsAppearance() {
-		leftHandValueTextField.text = "120.5"
+		leftHandValueTextField.placeholder = "0"
 		leftHandValueTextField.font = .boldSystemFont(ofSize: Constants.commonFontSize.rawValue)
 		leftHandValueTextField.textAlignment = .center
 		leftHandValueTextField.keyboardType = .numberPad
 		
-		rightHandValueTextField.text = "2.2"
+		rightHandValueTextField.placeholder = "0"
 		rightHandValueTextField.font = .boldSystemFont(ofSize: Constants.commonFontSize.rawValue)
 		rightHandValueTextField.textAlignment = .center
 		rightHandValueTextField.keyboardType = .numberPad
@@ -224,4 +247,5 @@ private extension HomeView {
 		rightHandCurrencyButton.translatesAutoresizingMaskIntoConstraints = false
 	}
 }
+
 
