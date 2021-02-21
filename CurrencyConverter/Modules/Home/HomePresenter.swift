@@ -27,7 +27,7 @@ final class HomePresenter {
 extension HomePresenter: IHomePresenter {
 	func valueDidEntered(value: String, from side: CurrencySide) {
 		guard let convertHelper = convertHelper else { return }
-		guard let floatValue = Float(value) else { return }
+		guard let floatValue = Float(value.replacingOccurrences(of: ",", with: ".")) else { return }
 		guard let labels = viewController?.getLabels() else { return }
 		let result = convertHelper.calculate(value: floatValue, keys: (labels.0, labels.1), whereSideIs: side)
 		let stringResult = String(format: "%.2f", result)

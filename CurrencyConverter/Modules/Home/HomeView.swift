@@ -164,12 +164,12 @@ private extension HomeView {
 		leftHandValueTextField.placeholder = "0"
 		leftHandValueTextField.font = .boldSystemFont(ofSize: Constants.commonFontSize.rawValue)
 		leftHandValueTextField.textAlignment = .left
-		leftHandValueTextField.keyboardType = .numberPad
+		leftHandValueTextField.keyboardType = .decimalPad
 		
 		rightHandValueTextField.placeholder = "0"
 		rightHandValueTextField.font = .boldSystemFont(ofSize: Constants.commonFontSize.rawValue)
 		rightHandValueTextField.textAlignment = .right
-		rightHandValueTextField.keyboardType = .numberPad
+		rightHandValueTextField.keyboardType = .decimalPad
 	}
 	
 	func setupLabelsAppearance() {
