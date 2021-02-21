@@ -89,20 +89,20 @@ private extension HomeView {
 	func setupConstraints() {
 		fieldsConstraints.append(contentsOf: [
 			leftHandValueTextField.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: Constants.defaultSpacing.rawValue),
-			leftHandValueTextField.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: Constants.regularSpacing.rawValue),
-			leftHandValueTextField.widthAnchor.constraint(equalToConstant: Constants.fieldsWidth.rawValue),
+			leftHandValueTextField.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: Constants.regularSpacing.rawValue + Constants.appleSpacing.rawValue),
+			leftHandValueTextField.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: Constants.fieldsWidthMultiplier.rawValue),
 			rightHandValueTextField.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: Constants.defaultSpacing.rawValue),
-			rightHandValueTextField.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -Constants.regularSpacing.rawValue),
-			rightHandValueTextField.widthAnchor.constraint(equalToConstant: Constants.fieldsWidth.rawValue)
+			rightHandValueTextField.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -Constants.regularSpacing.rawValue - Constants.appleSpacing.rawValue),
+			rightHandValueTextField.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: Constants.fieldsWidthMultiplier.rawValue)
 		])
 
 		labelsConstraints.append(contentsOf: [
 			leftHandCurrencyLabel.topAnchor.constraint(equalTo: arrowView.bottomAnchor, constant: Constants.appleSpacing.rawValue / 2),
 			leftHandCurrencyLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: Constants.regularSpacing.rawValue),
-			leftHandCurrencyLabel.widthAnchor.constraint(equalToConstant: Constants.fieldsWidth.rawValue),
+			leftHandCurrencyLabel.widthAnchor.constraint(equalToConstant: Constants.labelsWidth.rawValue),
 			rightHandCurrencyLabel.topAnchor.constraint(equalTo: arrowView.bottomAnchor, constant: Constants.appleSpacing.rawValue / 2),
 			rightHandCurrencyLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -Constants.regularSpacing.rawValue),
-			rightHandCurrencyLabel.widthAnchor.constraint(equalToConstant: Constants.fieldsWidth.rawValue)
+			rightHandCurrencyLabel.widthAnchor.constraint(equalToConstant: Constants.labelsWidth.rawValue)
 		])
 
 		buttonsConstraints.append(contentsOf: [
@@ -163,12 +163,12 @@ private extension HomeView {
 	func setupFieldsAppearance() {
 		leftHandValueTextField.placeholder = "0"
 		leftHandValueTextField.font = .boldSystemFont(ofSize: Constants.commonFontSize.rawValue)
-		leftHandValueTextField.textAlignment = .center
+		leftHandValueTextField.textAlignment = .left
 		leftHandValueTextField.keyboardType = .numberPad
 		
 		rightHandValueTextField.placeholder = "0"
 		rightHandValueTextField.font = .boldSystemFont(ofSize: Constants.commonFontSize.rawValue)
-		rightHandValueTextField.textAlignment = .center
+		rightHandValueTextField.textAlignment = .right
 		rightHandValueTextField.keyboardType = .numberPad
 	}
 	
