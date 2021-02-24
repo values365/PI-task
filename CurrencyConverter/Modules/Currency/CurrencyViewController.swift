@@ -15,6 +15,9 @@ final class CurrencyViewController: UIViewController {
 
 	private let presenter: ICurrencyPresenter
 	private let tableView = UITableView()
+
+	private var selectedCurrency = ""
+	private var selectedPath = IndexPath()
 	
 	// MARK: - Init
 	
@@ -34,6 +37,7 @@ final class CurrencyViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		presenter.viewDidLoad(with: self)
+		selectedCurrency = presenter.currentValute
 	}
 }
 
@@ -79,7 +83,10 @@ extension CurrencyViewController: UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: CurrencyViewCell.identifier, for: indexPath) as! CurrencyViewCell
-		cell.hideIcon()
+		if Array(presenter.currencies.keys)[indexPath.row] != selectedCurrency { cell.hideIcon() } else {
+			cell.showIcon()
+			selectedPath = indexPath
+		}
 		cell.setTitle(Array(presenter.currencies.values)[indexPath.row].name)
 		cell.setSubTitle(Array(presenter.currencies.keys)[indexPath.row])
 		return cell
@@ -99,6 +106,8 @@ extension CurrencyViewController: UITableViewDelegate {
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		if let cell = tableView.cellForRow(at: indexPath) as? CurrencyViewCell { cell.showIcon() }
+		if let cell = tableView.cellForRow(at: selectedPath) as? CurrencyViewCell { cell.hideIcon() }
+		selectedCurrency = Array(presenter.currencies.keys)[indexPath.row]
 		presenter.rowDidSelected(with: indexPath.row)
 	}
 }
